@@ -8,18 +8,36 @@ module.exports = {
     return { success: true, university: createdUniversity }
   },
   async getById(id) {
-    const user = await UniversityModel.findById(id)
-    if (!user) {
-      return { success: false }
+    try {
+      const university = await UniversityModel.findById(id)
+      if (!university) {
+        return { success: false }
+      }
+      return { success: true, university: university }
+    } catch (err) {
+      return { success: false, error: err }
     }
-    return { success: true, foundUser: user }
   },
-  async getAll(num) {
-    const universities = await UniversityModel.find({}).limit(num)
-    if (!universities) {
-      return { success: false }
+  async getByCountry(country) {
+    try {
+      const university = await UniversityModel.findOne({
+        country: country,
+      }).select("name country alpha_two_code")
+      return { success: true, university: university }
+    } catch (err) {
+      return { success: false, error: err }
     }
-    return { success: true, foundUniversities: universities }
+  },
+  async getAll(page) {
+    try {
+      const universities = await UniversityModel.find({})
+        .limit(20)
+        .select("name country alpha_two_code")
+        .skip(page)
+      return { success: true, universities: universities }
+    } catch (err) {
+      return { success: false, error: err }
+    }
   },
   async delete(id) {
     const deletedUser = await UniversityModel.findByIdAndDelete(id)
