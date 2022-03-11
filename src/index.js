@@ -11,7 +11,7 @@ const mongoose = require("mongoose")
 
 mongoose
   .connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((data) => console.log("connect!!"))
+  .then((data) => console.log("Database connection stablished"))
 
 const PORT = process.env.PORT || 3001
 
