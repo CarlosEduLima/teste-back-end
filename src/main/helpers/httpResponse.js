@@ -9,6 +9,7 @@ const serverError = (error) => {
   return {
     statusCode: 500,
     body: "Internal Server Error",
+    error: error,
   }
 }
 
