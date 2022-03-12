@@ -1,11 +1,12 @@
-const { UniversityModel } = require("../models/University")
+const UniversityModel = require("../models/University")
 module.exports = {
   async create(university) {
-    const createdUniversity = await UniversityModel(university).save()
-    if (!createdUniversity) {
-      return { success: false }
+    try {
+      const createdUniversity = await UniversityModel(university).save()
+      return { success: true, university: createdUniversity }
+    } catch (err) {
+      return { success: false, error: err }
     }
-    return { success: true, university: createdUniversity }
   },
   async getById(id) {
     try {
@@ -22,6 +23,16 @@ module.exports = {
     try {
       const university = await UniversityModel.findOne({
         country: country,
+      }).select("name country alpha_two_code")
+      return { success: true, university: university }
+    } catch (err) {
+      return { success: false, error: err }
+    }
+  },
+  async getByName(name) {
+    try {
+      const university = await UniversityModel.findOne({
+        name: name,
       }).select("name country alpha_two_code")
       return { success: true, university: university }
     } catch (err) {
