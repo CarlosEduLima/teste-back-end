@@ -4,8 +4,9 @@ module.exports = {
   async GetUniversitiesController(httpResquest) {
     if (httpResquest.query.country) {
       const country = httpResquest.query.country
-      country.charAt(0).toUpperCase() + country.slice(1);
-      const query = await UniversityDB.getByCountry(country)
+      const query = await UniversityDB.getByCountry(
+        country.charAt(0).toUpperCase() + country.slice(1)
+      )
       if (!query.success) {
         return httpResponse.serverError(query.error)
       }
