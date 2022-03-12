@@ -60,11 +60,12 @@ module.exports = {
     }
   },
   async delete(id) {
-    const deletedUser = await UniversityModel.findByIdAndDelete(id)
-    if (!deletedUser) {
-      return { success: false }
+    try {
+      const deletedUniversity = await UniversityModel.findByIdAndDelete(id)
+      return { success: true, university: deletedUniversity }
+    } catch (error) {
+      return { success: false, error: err }
     }
-    return { success: true, user: deletedUser }
   },
   async update(id, university) {
     //const { name, email, age, password, cpf, phoneNumber } = user
