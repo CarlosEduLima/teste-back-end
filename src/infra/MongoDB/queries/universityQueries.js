@@ -12,7 +12,7 @@ module.exports = {
     try {
       const university = await UniversityModel.findById(id)
       if (!university) {
-        return { success: false }
+        return { success: true, university: "No university found" }
       }
       return { success: true, university: university }
     } catch (err) {
@@ -21,9 +21,12 @@ module.exports = {
   },
   async getByCountry(country) {
     try {
-      const university = await UniversityModel.findOne({
+      const university = await UniversityModel.find({
         country: country,
       }).select("name country alpha_two_code")
+      /*if (!university) {
+        return { success: true, university: "No university found" }
+      }*/
       return { success: true, university: university }
     } catch (err) {
       return { success: false, error: err }
@@ -34,6 +37,9 @@ module.exports = {
       const university = await UniversityModel.findOne({
         name: name,
       }).select("name country alpha_two_code")
+      if (!university) {
+        return { success: true, university: "No university found" }
+      }
       return { success: true, university: university }
     } catch (err) {
       return { success: false, error: err }
@@ -45,6 +51,9 @@ module.exports = {
         .limit(20)
         .select("name country alpha_two_code")
         .skip(page)
+      if (!universities) {
+        return { success: true, university: "No university found" }
+      }
       return { success: true, universities: universities }
     } catch (err) {
       return { success: false, error: err }
@@ -57,19 +66,15 @@ module.exports = {
     }
     return { success: true, user: deletedUser }
   },
-  async update(id, user) {
-    const { name, email, age, password, cpf, phoneNumber } = user
-    const updatedUser = await UniversityModel.findByIdAndUpdate(id, {
-      name: name,
-      password: password,
-      email: email,
-      age: age,
-      cpf: cpf,
-      phoneNumber: phoneNumber,
-    })
-    if (!updatedUser) {
+  async update(id, university) {
+    //const { name, email, age, password, cpf, phoneNumber } = user
+    const updatedUniversity = await UniversityModel.findByIdAndUpdate(
+      id,
+      university
+    )
+    if (!updatedUniversity) {
       return { success: false }
     }
-    return { success: true, user: updatedUser }
+    return { success: true, university: updatedUniversity }
   },
 }
