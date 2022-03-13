@@ -11,13 +11,13 @@ module.exports = (router) => {
       async route() {
         return {
           statusCode: 200,
-          body: "app is working",
+          body: "api is working",
         }
       },
     }
   }
   router.get("/universities", adpter(getUniversitiesRouter()))
-  router.get("/test", adpter(test()))
+  router.get("/", adpter(test()))
   router.get("/university/:id", adpter(getUniversityRouter()))
   router.post("/universities", adpter(addUniversityRouter()))
   router.put("/universities/:id", adpter(updateUniversityRouter()))
