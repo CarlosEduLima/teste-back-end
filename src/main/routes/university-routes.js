@@ -5,7 +5,18 @@ const addUniversityRouter = require("../../presentation/routers/addUniversityRou
 const updateUniversityRouter = require("../../presentation/routers/updateUniversityRouter")
 const deleteUniversityRouter = require("../../presentation/routers/deleteUniversityRouter")
 module.exports = (router) => {
+  const test = () => {
+    return {
+      async route() {
+        return {
+          statusCode: 200,
+          body: "app is working",
+        }
+      },
+    }
+  }
   router.get("/universities", adpter(getUniversitiesRouter()))
+  router.get("/test", adpter(test()))
   router.get("/university/:id", adpter(getUniversityRouter()))
   router.post("/universities", adpter(addUniversityRouter()))
   router.put("/universities/:id", adpter(updateUniversityRouter()))
