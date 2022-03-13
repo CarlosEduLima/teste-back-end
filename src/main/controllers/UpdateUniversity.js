@@ -2,7 +2,7 @@ const httpResponse = require("../../main/helpers/httpResponse")
 const {
   UpdateUniversityCase,
 } = require("../../domain/universityCases/updateUniversityCase")
-const UniversityDb = require("../../infra/MongoDb/queries/universityQueries")
+const UniversityDb = require("../../infra/MongoDB/queries/universityQueries")
 module.exports = {
   async UpdateUserController(httpRequest) {
     const validatedUniversity = await UpdateUniversityCase(
