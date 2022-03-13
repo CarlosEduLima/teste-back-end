@@ -1,3 +1,4 @@
+//adpter que utiliza as funcionalidades do express
 module.exports = function ExpressRouterAdapter(router) {
   return async (req, res) => {
     const httpRequest = {

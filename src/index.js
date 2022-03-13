@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }))
 Routes(app)
 
 const mongoose = require("mongoose")
-
+//moongose conection
 mongoose
   .connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((data) => console.log("Database connection stablished"))

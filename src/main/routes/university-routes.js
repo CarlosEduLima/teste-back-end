@@ -1,3 +1,4 @@
+//rotas da aplicação que utilizam o adpter do express, assim a api não precisa depender do framework
 const adpter = require("../config/express-router.adpter")
 const getUniversitiesRouter = require("../../presentation/routers/getUniversitiesRouter")
 const getUniversityRouter = require("../../presentation/routers/getUniversityRouter")

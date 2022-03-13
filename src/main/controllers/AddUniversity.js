@@ -1,3 +1,5 @@
+//camada que irá fazer o controle do fluxo de dados
+//se comunica com a infra e domain
 const httpResponse = require("../../main/helpers/httpResponse")
 const {
   AddUniversityCase,

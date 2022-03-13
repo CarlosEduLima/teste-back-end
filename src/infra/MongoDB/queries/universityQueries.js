@@ -1,3 +1,4 @@
+//aqui ficara toda a comunicação com a tabela de universities no banco
 const UniversityModel = require("../models/University")
 module.exports = {
   async create(university) {
