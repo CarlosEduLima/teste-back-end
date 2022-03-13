@@ -2,7 +2,7 @@ const httpResponse = require("../../main/helpers/httpResponse")
 const {
   AddUniversityCase,
 } = require("../../domain/universityCases/addUniversityCase")
-const UniversityDB = require("../../infra/MongoDb/queries/universityQueries")
+const UniversityDB = require("../../infra/MongoDB/queries/universityQueries")
 
 module.exports = {
   async AddUniversityController(httpRequest) {
