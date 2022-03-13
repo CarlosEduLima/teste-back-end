@@ -1,5 +1,5 @@
 const httpResponse = require("../../main/helpers/httpResponse")
-const UniversityDb = require("../../infra/MongoDb/queries/universityQueries")
+const UniversityDb = require("../../infra/MongoDB/queries/universityQueries")
 module.exports = {
   async AddUniversityCase(university) {
     try {
