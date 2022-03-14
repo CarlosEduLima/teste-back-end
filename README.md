@@ -4,7 +4,7 @@
 
 API desenvolvida como teste para vaga de desenvolvedor backend.
 
-## Tecnologia
+## Tecnologias
 
     Node.js
     Express.js
