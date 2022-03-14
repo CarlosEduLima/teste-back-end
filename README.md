@@ -62,320 +62,161 @@ Usar credenciais já existentes
                    e retornar um response
 
 
+## Get test api
+
+### Request
+
+`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api`
+   
+### Response
+
+    app is working
+
 ## Get universities
 
 ### Request
 
-`GET /thing/`
+`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities`
 
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/
+request por página(opcional)
 
+`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities?page=1`
+   
 ### Response
 
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:30 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 2
+    [
+	{
+		"_id": "622aa8fda6ef3f7dca4b6a4e",
+		"country": "Paraguay",
+		"name": "Universidad Americana",
+		"alpha_two_code": "PY"
+	},
+	{
+		"_id": "622aa8fda6ef3f7dca4b6a51",
+		"country": "Paraguay",
+		"name": "Universidad Comunera",
+		"alpha_two_code": "PY"
+	},
+    ]
 
-    []
-
-## Create a new Thing
+## Get universidade por país
 
 ### Request
 
-`POST /thing/`
+`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities?country=brazil`
 
-    curl -i -H 'Accept: application/json' -d 'name=Foo&status=new' http://localhost:7000/thing
 
 ### Response
 
-    HTTP/1.1 201 Created
-    Date: Thu, 24 Feb 2011 12:36:30 GMT
-    Status: 201 Created
-    Connection: close
-    Content-Type: application/json
-    Location: /thing/1
-    Content-Length: 36
+   [
+	{
+		"_id": "622aa8fea6ef3f7dca4b6b78",
+		"country": "Brazil",
+		"name": "Centro Universitário Barao de Maua",
+		"alpha_two_code": "BR"
+	},
+	{
+		"_id": "622aa8fea6ef3f7dca4b6b7a",
+		"country": "Brazil",
+		"name": "Universidade Candido Mendes",
+		"alpha_two_code": "BR"
+	},
+   ]
 
-    {"id":1,"name":"Foo","status":"new"}
-
-## Get a specific Thing
+## Get universidade por id
 
 ### Request
 
-`GET /thing/id`
+`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/university/622aa8fea6ef3f7dca4b6b78`
 
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/1
 
 ### Response
 
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:30 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 36
+  {
+	"_id": "622aa8fea6ef3f7dca4b6b78",
+	"country": "Brazil",
+	"name": "Centro Universitário Barao de Maua",
+	"domains": [
+		"baraodemaua.br"
+	],
+	"alpha_two_code": "BR",
+	"web_pages": [
+		"http://www.baraodemaua.br/"
+	],
+	"__v": 0
+}
 
-    {"id":1,"name":"Foo","status":"new"}
-
-## Get a non-existent Thing
+## Post adicionar um universidade
 
 ### Request
 
-`GET /thing/id`
+`POST http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities`
 
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/9999
+JSON Body 
+{
+    name: 'universty name',
+    country: 'Brazil',
+    alpha_two_code:'BR'    
+}
 
 ### Response
 
-    HTTP/1.1 404 Not Found
-    Date: Thu, 24 Feb 2011 12:36:30 GMT
-    Status: 404 Not Found
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 35
+{
+    statusCode: 200,
+    success: true
+}
 
-    {"status":404,"reason":"Not found"}
-
-## Create another new Thing
+## Put atualizar uma universidade
 
 ### Request
 
-`POST /thing/`
+`PUT http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities/622aa8fea6ef3f7dca4b6b78`
 
-    curl -i -H 'Accept: application/json' -d 'name=Bar&junk=rubbish' http://localhost:7000/thing
+JSON Body 
+{
+    name: 'another universty name',
+    country: 'another country',
+    alpha_two_code:'PR'    
+}
 
 ### Response
 
-    HTTP/1.1 201 Created
-    Date: Thu, 24 Feb 2011 12:36:31 GMT
-    Status: 201 Created
-    Connection: close
-    Content-Type: application/json
-    Location: /thing/2
-    Content-Length: 35
+{
+    statusCode: 200,
+    success: true
+}
 
-    {"id":2,"name":"Bar","status":null}
-
-## Get list of Things again
+## Delete deletar uma universidade
 
 ### Request
 
-`GET /thing/`
-
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/
+`DELETE http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities/622aa8fea6ef3f7dca4b6b78`
 
 ### Response
 
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:31 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 74
+{
+    statusCode: 200,
+    success: true
+}
 
-    [{"id":1,"name":"Foo","status":"new"},{"id":2,"name":"Bar","status":null}]
 
-## Change a Thing's state
+## Response para dados inválidos 
 
-### Request
+{
+    statusCode: 404,
+    msg: "dados inválidos" 
+}
 
-`PUT /thing/:id/status/changed`
+## Response para dados inexistentes 
 
-    curl -i -H 'Accept: application/json' -X PUT http://localhost:7000/thing/1/status/changed
+{
+    statusCode: 404,
+    msg: "not found" 
+}
 
-### Response
+## Response para erros no server 
 
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:31 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 40
-
-    {"id":1,"name":"Foo","status":"changed"}
-
-## Get changed Thing
-
-### Request
-
-`GET /thing/id`
-
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/1
-
-### Response
-
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:31 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 40
-
-    {"id":1,"name":"Foo","status":"changed"}
-
-## Change a Thing
-
-### Request
-
-`PUT /thing/:id`
-
-    curl -i -H 'Accept: application/json' -X PUT -d 'name=Foo&status=changed2' http://localhost:7000/thing/1
-
-### Response
-
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:31 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 41
-
-    {"id":1,"name":"Foo","status":"changed2"}
-
-## Attempt to change a Thing using partial params
-
-### Request
-
-`PUT /thing/:id`
-
-    curl -i -H 'Accept: application/json' -X PUT -d 'status=changed3' http://localhost:7000/thing/1
-
-### Response
-
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:32 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 41
-
-    {"id":1,"name":"Foo","status":"changed3"}
-
-## Attempt to change a Thing using invalid params
-
-### Request
-
-`PUT /thing/:id`
-
-    curl -i -H 'Accept: application/json' -X PUT -d 'id=99&status=changed4' http://localhost:7000/thing/1
-
-### Response
-
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:32 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 41
-
-    {"id":1,"name":"Foo","status":"changed4"}
-
-## Change a Thing using the _method hack
-
-### Request
-
-`POST /thing/:id?_method=POST`
-
-    curl -i -H 'Accept: application/json' -X POST -d 'name=Baz&_method=PUT' http://localhost:7000/thing/1
-
-### Response
-
-    HTTP/1.1 200 OK
-    Date: Thu, 24 Feb 2011 12:36:32 GMT
-    Status: 200 OK
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 41
-
-    {"id":1,"name":"Baz","status":"changed4"}
-
-## Change a Thing using the _method hack in the url
-
-### Request
-
-`POST /thing/:id?_method=POST`
-
-    curl -i -H 'Accept: application/json' -X POST -d 'name=Qux' http://localhost:7000/thing/1?_method=PUT
-
-### Response
-
-    HTTP/1.1 404 Not Found
-    Date: Thu, 24 Feb 2011 12:36:32 GMT
-    Status: 404 Not Found
-    Connection: close
-    Content-Type: text/html;charset=utf-8
-    Content-Length: 35
-
-    {"status":404,"reason":"Not found"}
-
-## Delete a Thing
-
-### Request
-
-`DELETE /thing/id`
-
-    curl -i -H 'Accept: application/json' -X DELETE http://localhost:7000/thing/1/
-
-### Response
-
-    HTTP/1.1 204 No Content
-    Date: Thu, 24 Feb 2011 12:36:32 GMT
-    Status: 204 No Content
-    Connection: close
-
-
-## Try to delete same Thing again
-
-### Request
-
-`DELETE /thing/id`
-
-    curl -i -H 'Accept: application/json' -X DELETE http://localhost:7000/thing/1/
-
-### Response
-
-    HTTP/1.1 404 Not Found
-    Date: Thu, 24 Feb 2011 12:36:32 GMT
-    Status: 404 Not Found
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 35
-
-    {"status":404,"reason":"Not found"}
-
-## Get deleted Thing
-
-### Request
-
-`GET /thing/1`
-
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/1
-
-### Response
-
-    HTTP/1.1 404 Not Found
-    Date: Thu, 24 Feb 2011 12:36:33 GMT
-    Status: 404 Not Found
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 35
-
-    {"status":404,"reason":"Not found"}
-
-## Delete a Thing using the _method hack
-
-### Request
-
-`DELETE /thing/id`
-
-    curl -i -H 'Accept: application/json' -X POST -d'_method=DELETE' http://localhost:7000/thing/2/
-
-### Response
-
-    HTTP/1.1 204 No Content
-    Date: Thu, 24 Feb 2011 12:36:33 GMT
-    Status: 204 No Content
-    Connection: close
+{
+    statusCode: 500,
+    msg: "internal server error" 
+}
