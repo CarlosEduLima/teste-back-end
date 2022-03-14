@@ -66,7 +66,7 @@ Usar credenciais já existentes
 
 ### Request
 
-`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api`
+`GET http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api`
    
 ### Response
 
@@ -76,11 +76,11 @@ Usar credenciais já existentes
 
 ### Request
 
-`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities`
+`GET http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/universities`
 
 request por página(opcional)
 
-`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities?page=1`
+`GET http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/universities?page=1`
    
 ### Response
 
@@ -103,7 +103,7 @@ request por página(opcional)
 
 ### Request
 
-`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities?country=brazil`
+`GET http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/universities?country=brazil`
 
 
 ### Response
@@ -127,7 +127,7 @@ request por página(opcional)
 
 ### Request
 
-`GET http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/university/622aa8fea6ef3f7dca4b6b78`
+`GET http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/university/622aa8fea6ef3f7dca4b6b78`
 
 
 ### Response
@@ -150,7 +150,7 @@ request por página(opcional)
 
 ### Request
 
-`POST http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities`
+`POST http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/universities`
 
 JSON Body 
 {
@@ -170,7 +170,7 @@ JSON Body
 
 ### Request
 
-`PUT http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities/622aa8fea6ef3f7dca4b6b78`
+`PUT http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/universities/622aa8fea6ef3f7dca4b6b78`
 
 JSON Body 
 {
@@ -190,7 +190,7 @@ JSON Body
 
 ### Request
 
-`DELETE http://ec2-3-14-149-120.us-east-2.compute.amazonaws.com/api/universities/622aa8fea6ef3f7dca4b6b78`
+`DELETE http://ec2-18-118-84-139.us-east-2.compute.amazonaws.com/api/universities/622aa8fea6ef3f7dca4b6b78`
 
 ### Response
 
