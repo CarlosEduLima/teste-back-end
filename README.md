@@ -38,20 +38,28 @@ Usar credenciais já existentes
 # REST API Arquitetura
 
     src - pasta com código (source code)
+
     domain - contém casos de uso que são definidos nas regras de negócio da api
     faz a validação dos dados antes da comunicação com a base de dados
+
     infra - contém toda comunicação com serviços externos, nesse caso o MongoDB
-        MongoDB - configuração do Mongo
+         MongoDB - configuração do Mongo
             models - models do MongoDB
             queries - folder que irá ter arquivos com funções que se comunicam com a base
                         de dados, não há nenhuma tratativa de dados aqui, pois se espera que 
                         eles cheguem aqui validados pelas outras camadas
             schemas - schemas do MongoDB
+
     main - configurações e controllers da API
         config - configurações da API
-                express-router.adpter - adper para o express, desing pattern para tornar a api 
-                                        inpendente dele, assim se for utilizado outro framework
-                                        não irá ter efeitos colaterais no core da api
+                    express-router.adpter - adper para o express, desing pattern para tornar a api 
+                                            independente dele, assim se for utilizado outro framework
+                                            não irá ter efeitos colaterais no core da api
+    controllers - contém todos os controllers da api, eles irão manusear o fluxo de dados
+    helpers - funções e utilitários
+    presentation - camada com a qual os serviços que utilizarem a API irão se comunicar,
+                   contém apenas um apontamento para um controller que irá tratar a requisição
+                   e retornar um response
 
 
 ## Get universities

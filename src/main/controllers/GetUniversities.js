@@ -13,7 +13,7 @@ module.exports = {
       }
       return httpResponse.success(query.university)
     } else {
-      const query = await UniversityDB.getAll()
+      const query = await UniversityDB.getAll(httpResquest.query.page || 1)
       if (!query.success) {
         return httpResponse.serverError(query.error)
       }
