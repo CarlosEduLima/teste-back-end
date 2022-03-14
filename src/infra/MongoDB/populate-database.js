@@ -12,9 +12,7 @@ const countries = [
   "uruguay",
 ]
 mongoose
-  .connect(
-    "mongodb+srv://carlos_lima:zUZZb7QzlTim31pz@cluster0.dwnwv.mongodb.net/universities_db?retryWrites=true&w=majority"
-  )
+  .connect(process.env.URI)
   .then(async () => {
     const data = await UniversityModel.find()
     if (data) {
